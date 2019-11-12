@@ -1,0 +1,29 @@
+---
+title: "class-11-12-2019"
+author: "Feven Yohannes"
+date: "November 12, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(googlesheets4)
+library(tidyverse)
+```
+
+```{r, warning=FALSE,message=FALSE}
+sheets_deauth() #Allows us to read a public link
+election <- read_sheet("13NhlT-Oik5P4NOKRWwrJ7xZQlddFNk81HHEw9wkWglM") 
+
+
+election %>%
+  ggplot(aes(partisanship,dvote)) +
+  geom_jitter(height = 0.2) + #spreads out the data 
+  geom_smooth(method="lm",se=FALSE) 
+
+line <-lm(data= election,dvote ~partisanship) #Running a regression line  
+
+```
+
+
+
